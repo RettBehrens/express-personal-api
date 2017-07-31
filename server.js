@@ -1,6 +1,6 @@
 // require express and other modules
-var express = require('express'),
-    app = express();
+var express = require('express');
+var app = express();
 
 // parse incoming urlencoded form data
 // and populate the req.body object
@@ -55,7 +55,7 @@ app.get('/api', function api_index(req, res) {
 });
 
 //PROFILE
-app.get('./api/profile', function(req, res) {
+app.get('/api/profile', function(req, res) {
   res.json({
     name: "Everett",
     goes_by: "Rett",
@@ -68,7 +68,7 @@ app.get('./api/profile', function(req, res) {
 });
 
 //GET or SHOW, all excuses
-app.get('./api/excuses', function(req, res) {
+app.get('/api/excuses', function(req, res) {
   db.Excuse.find(function(err, excuses) {
     if (err) {
       return console.log("Couldn't find any excuses: " + err);
@@ -78,7 +78,7 @@ app.get('./api/excuses', function(req, res) {
 });
 
 //GET or SHOW, excuse by title
-app.get('./api/excuses/:title', function(req, res) {
+app.get('/api/excuses/:title', function(req, res) {
   db.Excuse.findOne({title: req.params.title}, function(err, excuse) {
     if (err) {
       return console.log("That's not a valid excuse: " + err);
@@ -88,7 +88,7 @@ app.get('./api/excuses/:title', function(req, res) {
 });
 
 //POST or CREATE, new excuse
-app.post('./api/excuses', function(req, res) {
+app.post('/api/excuses', function(req, res) {
   var newExcuse = new db.Excuse({
     title: req.body.title,
     details: req.body.details,
@@ -103,7 +103,7 @@ app.post('./api/excuses', function(req, res) {
 });
 
 //PUT or UPDATE, excuse by title
-app.put('./api/excuse/:title', function (req, res) {
+app.put('/api/excuse/:title', function (req, res) {
   db.Excuse.findOne({title: req.params.title}, function(err, excuse) {
     excuse.title = req.body.title;
     excuse.details = req.body.details;
@@ -118,7 +118,7 @@ app.put('./api/excuse/:title', function (req, res) {
 });
 
 //DELETE, excuse by title
-app.delete('./api/excuse/:title', function (req, res) {
+app.delete('/api/excuse/:title', function (req, res) {
   db.Excuse.findOneAndRemove({title: req.params.title}, function(err, deletedExcuse) {
     if (err) {
       return console.log("Could not get rid of excuse: " + err);
