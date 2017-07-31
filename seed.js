@@ -1,15 +1,43 @@
 // This file allows us to seed our application with data
 // simply run: `node seed.js` from the root of this project folder.
 
-// var db = require('./models');
+var db = require('./models');
 
-// var new_campsite = {description: "Sharp rocks. Middle of nowhere."}
+var excuse_list = [{
+	title: "tired",
+	details: "I'm too tired to do/start X",
+	valid: false
+},
+{
+	title: "busy",
+	details: "I'm too busy to do/start X",
+	valid: false
+},
+{
+	title: "sick",
+	details: "I'm not feeling up to doing/starting X",
+	valid: false
+},
+{
+	title: "broke",
+	details: "I can't afford to do/start X",
+	valid: true
+}];
 
-// db.Campsite.create(new_campsite, function(err, campsite){
-//   if (err){
-//     return console.log("Error:", err);
-//   }
+db.Excuse.remove({}, function(err, excuses) {
+	if (err) {
+		console.log("Error occured removing excuses: " + err);
+	} else {
+		console.log("Removed all excuses");
+	}
+	db.Excuse.create(excuse_list, function(err, excuse) {
+		if (err) {
+			return console.log("Error: " + err);
+		} else {
+			console.log("Recreated all excuses");
+			process.exit();
+		}
+	});
+});
 
-//   console.log("Created new campsite", campsite._id)
-//   process.exit(); // we're all done! Exit the program.
-// })
+
