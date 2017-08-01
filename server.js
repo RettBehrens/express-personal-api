@@ -103,7 +103,7 @@ app.post('/api/excuses', function(req, res) {
 });
 
 //PUT or UPDATE, excuse by title
-app.put('/api/excuse/:title', function (req, res) {
+app.put('/api/excuses/:title', function (req, res) {
   db.Excuse.findOne({title: req.params.title}, function(err, excuse) {
     excuse.title = req.body.title;
     excuse.details = req.body.details;
@@ -118,7 +118,7 @@ app.put('/api/excuse/:title', function (req, res) {
 });
 
 //DELETE, excuse by title
-app.delete('/api/excuse/:title', function (req, res) {
+app.delete('/api/excuses/:title', function (req, res) {
   db.Excuse.findOneAndRemove({title: req.params.title}, function(err, deletedExcuse) {
     if (err) {
       return console.log("Could not get rid of excuse: " + err);
